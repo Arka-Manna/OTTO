@@ -20,15 +20,20 @@ Sound Feedback: Each time the mode changes, the robot plays a unique sound, prov
 Movement Modes:
 
 # The robot has a total of 14 modes (totalModes = 14), each associated with a different action:
--Walking forward and backward.
--Turning left and right.
--Bending forward and backward.
--Shaking its leg.
--Moonwalking (left and right).
--Crusaito (a side-to-side motion).
--Flapping its arms (legs in this case).
--Jumping.
--Custom dance moves.
+Here's a description you can use for your GitHub repository:
+- **Walking:** The robot can walk both forward and backward.
+- **Turning:** It can turn left and right.
+- **Bending:** The robot can bend forward and backward.
+- **Shaking Leg:** A fun leg-shaking motion.
+- **Moonwalking:** Performs the iconic moonwalk, both left and right.
+- **Crusaito:** A side-to-side motion similar to dancing.
+- **Flapping:** Mimics flapping its arms (or legs in this case).
+- **Jumping:** The robot can jump in place.
+- **Custom Dance Moves:** Unique dance sequences combining different moves.
+
+# How It Works
+
+The robot's modes are changed using a touch sensor. Each mode triggers a different movement or dance sequence, making the robot dynamic and entertaining. The robot also plays unique sounds with each mode change, enhancing the interactive experience.
 
 # Mode Control:
 
