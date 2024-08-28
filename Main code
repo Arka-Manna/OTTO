@@ -1,0 +1,123 @@
+#include <Otto.h>
+
+Otto Otto;  
+
+// Pin Definitions
+#define LeftLeg 2 
+#define RightLeg 3
+#define LeftFoot 4 
+#define RightFoot 5 
+#define Buzzer 13
+#define TouchSensor 7
+
+int currentMode = 0; // Variable to store the current mode
+int totalModes = 14; // Total number of modes available
+
+void setup() {
+  Otto.init(LeftLeg, RightLeg, LeftFoot, RightFoot, true, Buzzer); // Set the servo pins and Buzzer pin
+  pinMode(TouchSensor, INPUT);
+  Otto.sing(S_connection); // Otto wake up!
+  Otto.home();
+}
+
+void loop() {
+  if (digitalRead(TouchSensor) == HIGH) {
+    changeMode();
+    Otto.sing(S_surprise); // Play a unique sound each time the mode changes
+    delay(1000); // Debounce delay
+  }
+  
+  performMove();
+}
+
+void performMove() {
+  switch (currentMode) {
+    case 0:
+      Otto.walk(4, 1000, 1); // Walking Forward
+      delay(500); // Short delay between moves
+      break;
+    case 1:
+      Otto.walk(4, 1000, -1); // Walking Backward
+      delay(500);
+      break;
+    case 2:
+      Otto.turn(4, 1000, 1); // Turning Left
+      delay(500);
+      break;
+    case 3:
+      Otto.turn(4, 1000, -1); // Turning Right
+      delay(500);
+      break;
+    case 4:
+      Otto.bend(1, 1000, 1); // Bending Forward
+      delay(500);
+      break;
+    case 5:
+      Otto.bend(1, 1000, -1); // Bending Backward
+      delay(500);
+      break;
+    case 6:
+      Otto.shakeLeg(2, 1500, 1); // Shaking Leg
+      delay(500);
+      break;
+    case 7:
+      Otto.moonwalker(4, 1000, 25, 1); // Moonwalker Left
+      delay(500);
+      break;
+    case 8:
+      Otto.moonwalker(4, 1000, 25, -1); // Moonwalker Right
+      delay(500);
+      break;
+    case 9:
+      Otto.crusaito(2, 1000, 25, 1); // Crusaito Left
+      delay(500);
+      break;
+    case 10:
+      Otto.crusaito(2, 1000, 25, -1); // Crusaito Right
+      delay(500);
+      break;
+    case 11:
+      Otto.flapping(2, 1000, 25, 1); // Flapping
+      delay(500);
+      break;
+    case 12:
+      Otto.jump(1, 1000); // Jump
+      delay(500);
+      break;
+    case 13:
+      danceMove1(); // Dance Move 1
+      break;
+    case 14:
+      danceMove2(); // Dance Move 2
+      break;
+    default:
+      Otto.home(); // Return to home position
+      delay(500);
+      break;
+  }
+}
+
+void changeMode() {
+  currentMode++;
+  if (currentMode > totalModes) {
+    currentMode = 0;
+  }
+}
+
+void danceMove1() {
+  Otto.moonwalker(2, 1000, 20, 1); // Moonwalker Left
+  delay(500);
+  Otto.moonwalker(2, 1000, 20, -1); // Moonwalker Right
+  delay(500);
+  Otto.shakeLeg(2, 1500, 1); // Shake Leg
+  delay(500);
+}
+
+void danceMove2() {
+  Otto.crusaito(2, 1000, 20, 1); // Crusaito Left
+  delay(500);
+  Otto.crusaito(2, 1000, 20, -1); // Crusaito Right
+  delay(500);
+  Otto.flapping(2, 1000, 20, 1); // Flapping Forward
+  delay(500);
+}
